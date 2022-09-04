@@ -1,12 +1,13 @@
 package com.sandbox.sheka.config.utils;
 
-/**
- * Constatnts.
- *
- * @author Egor Sheka <y.sheka@sam-solutions.com>
- */
 public class Constants
 {
     public final static String SCOPE = "scope";
+    public final static String BUFFER_USER = "user";
+    public final static String CLIENT_ID = "client_id";
+    public final static String CLIENT_SECRET = "client_secret";
+    public final static String CODE = "code";
+
+
 
 }
