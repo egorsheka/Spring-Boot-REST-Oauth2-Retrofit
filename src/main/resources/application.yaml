@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          sandbox:
+            clientId: HKGzRFKpSVjSpTPQ
+            clientSecret: ovnLjsKEEciCxjwmeHZSB
+            client-authentication-method: client_secret_post
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/sandbox
+            scope: aisp
+            clientName: sandbox
+        provider:
+          sandbox:
+            authorization-uri: http://test.devenv.smartym.by/signin
+            token-uri: http://test.devenv.smartym.by/token
+            user-info-uri: http://test.devenv.smartym.by/payment-requests
