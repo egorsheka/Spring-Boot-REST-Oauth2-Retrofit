@@ -1,7 +1,7 @@
 package com.sandbox.sheka.httpclient;
 
-import com.sandbox.sheka.dto.Payments;
 import com.sandbox.sheka.dto.Token;
+import com.sandbox.sheka.dto.payload.PayloadDto;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -29,7 +29,7 @@ public interface RetrofitHttpClient
 
 
     @POST("/payment-requests")
-    Call<Token> paymentRequests(@Header("Authorization") String token, @Body Payments payments);
+    Call<String> paymentRequests(@Header("Authorization") String token, @Body PayloadDto payload);
 
 
 }

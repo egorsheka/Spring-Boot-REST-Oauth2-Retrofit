@@ -64,7 +64,7 @@ public class CustomAuthorizationCodeTokenResponseClient implements OAuth2AccessT
         Map<String, String> queries = queriesListMap
             .entrySet()
             .stream()
-            .flatMap(e -> e.getValue().stream().map(v -> new AbstractMap.SimpleEntry<>(v, e.getKey())))
+            .flatMap(e -> e.getValue().stream().map(v -> new AbstractMap.SimpleEntry<>(e.getKey(), v)))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         Call<Token> token = retrofitHttpClient.getToken(
