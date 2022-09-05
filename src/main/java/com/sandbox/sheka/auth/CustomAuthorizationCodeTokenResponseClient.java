@@ -2,11 +2,13 @@ package com.sandbox.sheka.auth;
 
 import java.io.IOException;
 import java.util.AbstractMap;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import com.google.gson.Gson;
 import com.sandbox.sheka.dto.Token;
 import com.sandbox.sheka.httpclient.RetrofitHttpClient;
 import org.springframework.core.convert.converter.Converter;
@@ -45,19 +47,28 @@ public class CustomAuthorizationCodeTokenResponseClient implements OAuth2AccessT
         RequestEntity<?> request = this.requestEntityConverter.convert(authorizationGrantRequest);
         Token response = getResponse(request);
 
-        OAuth2AccessTokenResponse tokenResponse = OAuth2AccessTokenResponse
+        return OAuth2AccessTokenResponse
             .withToken(response.getAccessToken())
             .tokenType(OAuth2AccessToken.TokenType.BEARER.getValue().equals(response.getTokenType()) ? OAuth2AccessToken.TokenType.BEARER : null)
             .expiresIn(Long.parseLong(response.getExpiresIn()))
             .scopes(Set.of(response.getScope()))
+            .additionalParameters(getPayLoadFromToken(response.getAccessToken()))
             .build();
+    }
 
-        return tokenResponse;
+    private Map<String, Object> getPayLoadFromToken(String token){
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+        Gson gson = new Gson();
+        // TODO  Unchecked assignment: 'java.util.Map' to 'java.util.Map<java.lang.String,java.lang.Object>
+        return  gson.fromJson(payload, Map.class);
     }
 
     private Token getResponse(RequestEntity<?> request)
     {
-
+//ToDO  Argument 'request' might be null
+        // TODO Unchecked cast: 'capture<?>' to 'java.util.Map<java.lang.String,java.util.List<java.lang.String>>'
         Map<String, List<String>> queriesListMap = (Map<String, List<String>>) request.getBody();
         Assert.notNull(queriesListMap, "queriesListMap cannot be null");
 

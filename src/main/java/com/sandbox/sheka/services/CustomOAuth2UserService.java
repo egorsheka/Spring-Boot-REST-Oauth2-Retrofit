@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import static com.sandbox.sheka.config.utils.Constants.BUFFER_USER;
+import static com.sandbox.sheka.config.utils.Constants.NAME;
 import static com.sandbox.sheka.config.utils.Constants.SCOPE;
 
 
@@ -19,9 +19,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     {
 
         Map<String, Object> userAttributes = new HashMap<>();
-        userAttributes.put(BUFFER_USER, BUFFER_USER);
         userAttributes.put(SCOPE, userRequest.getAccessToken().getScopes());
 
-        return new DefaultOAuth2User(null, userAttributes, BUFFER_USER);
+        Map<String, Object> additionalParameters = userRequest.getAdditionalParameters();
+        if(additionalParameters.containsKey(NAME)){
+            userAttributes.put(NAME, additionalParameters.get(NAME));
+        }
+
+        return new DefaultOAuth2User(null, userAttributes, NAME);
     }
 }

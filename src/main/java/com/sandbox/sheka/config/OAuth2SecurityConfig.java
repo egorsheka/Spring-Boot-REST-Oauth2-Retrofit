@@ -6,7 +6,6 @@ import com.sandbox.sheka.converters.spring.CustomOAuth2AuthorizationCodeGrantReq
 import com.sandbox.sheka.httpclient.RetrofitHttpClient;
 import com.sandbox.sheka.services.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
