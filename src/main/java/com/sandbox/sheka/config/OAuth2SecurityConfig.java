@@ -35,6 +35,7 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         http.
             authorizeRequests()
+            .antMatchers("/payment").permitAll()
             .anyRequest().authenticated()
             .and()
             .oauth2Login()
