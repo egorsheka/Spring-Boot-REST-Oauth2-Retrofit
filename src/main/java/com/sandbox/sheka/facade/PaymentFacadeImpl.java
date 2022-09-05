@@ -2,15 +2,9 @@ package com.sandbox.sheka.facade;
 
 
 import java.io.IOException;
-import com.sandbox.sheka.dto.payload.BeneficiaryDto;
-import com.sandbox.sheka.dto.payload.CreditTransferTransactionDto;
-import com.sandbox.sheka.dto.payload.CreditorAccountDto;
-import com.sandbox.sheka.dto.payload.CreditorDto;
-import com.sandbox.sheka.dto.payload.InstructedAmountDto;
 import com.sandbox.sheka.dto.payload.PayloadDto;
-import com.sandbox.sheka.dto.payload.PaymentTypeInformationDto;
-import com.sandbox.sheka.dto.payload.RemittanceInformationDto;
 import com.sandbox.sheka.httpclient.RetrofitHttpClient;
+import okhttp3.ResponseBody;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
@@ -26,29 +20,29 @@ public class PaymentFacadeImpl implements PaymentFacade
     }
 
     @Override
-    public String pay(OAuth2AuthorizedClient client)
+    public String pay(OAuth2AuthorizedClient client, PayloadDto payload)
     {
 
-        PayloadDto payload = PayloadDto.builder()
-            .beneficiary(new BeneficiaryDto(new CreditorDto("Ben"), new CreditorAccountDto("DHDH34HF73r3HFIRFDH43rf")))
-            .creationDateTime("date")
-            .creditTransferTransaction(new CreditTransferTransactionDto(new InstructedAmountDto(1, "byn"), new RemittanceInformationDto(""), "date"))
-            .numberOfTransactions(1)
-            .paymentInformationId("123435")
-            .paymentTypeInformation(new PaymentTypeInformationDto("1", "1", "1"))
-            .build();
+        Response<ResponseBody> execute;
+        ResponseBody body;
+        String result = null;
 
-        Response<String> execute;
-        String body = null;
+        StringBuilder token = new StringBuilder();
+        token.append(client.getAccessToken().getTokenType().getValue())
+            .append(' ')
+            .append(client.getAccessToken().getTokenValue());
+
         try
         {
-            execute = retrofitHttpClient.paymentRequests(client.getAccessToken().getTokenType() + " " + client.getAccessToken().getTokenValue(), payload).execute();
+            execute = retrofitHttpClient.paymentRequests(token.toString(), payload).execute();
             body = execute.body();
+            //todo Method invocation 'string' may produce 'NullPointerException'
+            result = body.string();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        return body;
+        return result;
     }
 }
