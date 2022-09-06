@@ -1,5 +1,7 @@
 package com.sandbox.sheka.dto;
 
+
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentPageDto
 {
-
     private String iban;
     private String name;
-    private String amount;
+    private BigDecimal amount;
     private String currency;
 }

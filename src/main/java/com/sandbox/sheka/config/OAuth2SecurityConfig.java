@@ -4,7 +4,7 @@ import java.util.List;
 import com.sandbox.sheka.auth.CustomAuthorizationCodeTokenResponseClient;
 import com.sandbox.sheka.converters.spring.CustomOAuth2AuthorizationCodeGrantRequestEntityConverter;
 import com.sandbox.sheka.httpclient.RetrofitHttpClient;
-import com.sandbox.sheka.services.CustomOAuth2UserService;
+import com.sandbox.sheka.auth.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

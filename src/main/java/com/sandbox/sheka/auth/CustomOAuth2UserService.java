@@ -1,4 +1,4 @@
-package com.sandbox.sheka.services;
+package com.sandbox.sheka.auth;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,13 +1,12 @@
 package com.sandbox.sheka.config.utils;
 
-public class Constants
+public interface Constants
 {
-    public final static String SCOPE = "scope";
-    public final static String NAME = "name";
-    public final static String CLIENT_ID = "client_id";
-    public final static String CLIENT_SECRET = "client_secret";
-    public final static String CODE = "code";
-
-
+    String SCOPE = "scope";
+    String NAME = "name";
+    String CLIENT_ID = "client_id";
+    String CLIENT_SECRET = "client_secret";
+    String CODE = "code";
+    String RESOURCE_OWNER_URL = "http://test.devenv.smartym.by";
 
 }

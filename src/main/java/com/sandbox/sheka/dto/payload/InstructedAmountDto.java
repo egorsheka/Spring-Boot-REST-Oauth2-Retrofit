@@ -1,5 +1,6 @@
 package com.sandbox.sheka.dto.payload;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InstructedAmountDto
 {
-    private double amount;
+    private BigDecimal amount;
     private String currency;
 }

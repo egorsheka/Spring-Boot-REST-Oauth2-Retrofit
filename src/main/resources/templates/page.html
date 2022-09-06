@@ -7,10 +7,10 @@
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/payment-requests}" th:object="${paymentPageDto}" method="post">
-    <p>Message: <input type="text" th:field="*{iban}" /></p>
-    <p>Message: <input type="text" th:field="*{name}" /></p>
-    <p>Message: <input type="text" th:field="*{amount}" /></p>
-    <p>Message: <input type="text" th:field="*{currency}" /></p>
+    <p>iban: <input type="text" th:field="*{iban}" /></p>
+    <p>name: <input type="text" th:field="*{name}" /></p>
+    <p>amount: <input type="text" th:field="*{amount}" /></p>
+    <p>currency: <input type="text" th:field="*{currency}" /></p>
     <p><input type="submit" value="submit" />
 </form>
 </body>
