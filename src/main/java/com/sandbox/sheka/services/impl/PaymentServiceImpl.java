@@ -5,11 +5,9 @@ import java.io.IOException;
 import com.sandbox.sheka.dto.payload.PayloadDto;
 import com.sandbox.sheka.httpclient.RetrofitHttpClient;
 import com.sandbox.sheka.services.PaymentService;
-import okhttp3.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,8 +28,8 @@ public class PaymentServiceImpl implements PaymentService
     @Override
     public String pay(OAuth2AccessToken token, PayloadDto payload)
     {
-        Response<ResponseBody> execute;
-        ResponseBody response;
+        Response<String> execute;
+        String response;
 
         String fullToken = token.getTokenType().getValue()
             .concat(" ")
@@ -41,11 +39,8 @@ public class PaymentServiceImpl implements PaymentService
         {
             execute = retrofitHttpClient.paymentRequests(fullToken, payload).execute();
             response = execute.body();
-            if (response == null)
-            {
-                throw new IOException();
-            }
-            return response.string();
+
+            return response;
         }
         catch (IOException e)
         {

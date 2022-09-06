@@ -38,7 +38,7 @@ public class PaymentController
 
     @PostMapping("/payment-requests")
     @ResponseBody
-    public ResponseEntity<String> paymentRequests(@ModelAttribute PaymentPageDto paymentPageDto, BindingResult result, OAuth2AuthenticationToken authentication, HttpSession httpSession)
+    public ResponseEntity<String> paymentRequests(@ModelAttribute PaymentPageDto paymentPageDto, OAuth2AuthenticationToken authentication, HttpSession httpSession)
     {
         OAuth2AccessToken token = extractToken(authorizedClientService, authentication);
 
