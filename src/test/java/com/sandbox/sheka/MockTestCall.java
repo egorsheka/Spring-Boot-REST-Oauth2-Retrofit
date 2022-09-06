@@ -1,23 +1,23 @@
-
 package com.sandbox.sheka;
 
-import java.io.IOException;
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import okio.Timeout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MockTestCall implements Call<String>
+public class MockTestCall implements Call<ResponseBody>
 {
     @Override
-    public Response<String> execute()
+    public Response<ResponseBody> execute()
     {
-        return Response.success("ok");
+        return Response.success(ResponseBody.create(MediaType.get("application/json"), "ok"));
     }
 
     @Override
-    public void enqueue(Callback<String> callback)
+    public void enqueue(Callback<ResponseBody> callback)
     {
         throw new IllegalCallerException();
     }
@@ -42,7 +42,7 @@ public class MockTestCall implements Call<String>
     }
 
     @Override
-    public Call<String> clone()
+    public Call<ResponseBody> clone()
     {
         return null;
     }
