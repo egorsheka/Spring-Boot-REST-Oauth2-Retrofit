@@ -30,7 +30,7 @@ public interface RetrofitHttpClient
 
 
     @POST("/payment-requests")
-    Call<String> paymentRequests(@Header("Authorization") String token, @Body PayloadDto payload);
+    Call<ResponseBody> paymentRequests(@Header("Authorization") String token, @Body PayloadDto payload);
 
 
 }

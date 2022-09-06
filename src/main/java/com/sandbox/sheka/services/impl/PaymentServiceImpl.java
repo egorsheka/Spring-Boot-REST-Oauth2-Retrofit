@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
+import okhttp3.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 import retrofit2.Response;
 
@@ -28,7 +29,7 @@ public class PaymentServiceImpl implements PaymentService
     @Override
     public String pay(OAuth2AccessToken token, PayloadDto payload)
     {
-        Response<String> execute;
+        Response<ResponseBody> execute;
         String response;
 
         String fullToken = token.getTokenType().getValue()
@@ -38,7 +39,11 @@ public class PaymentServiceImpl implements PaymentService
         try
         {
             execute = retrofitHttpClient.paymentRequests(fullToken, payload).execute();
-            response = execute.body();
+            if(execute.body() == null)
+            {
+                throw new IOException();
+            }
+            response = execute.body().string();
 
             return response;
         }
